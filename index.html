@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcos Paulo | Desenvolvedor de Software</title>
+<meta name="description" content="Marcos Paulo — Desenvolvedor de Software em Petrópolis, Rio de Janeiro. Aplicações web, APIs e projetos com Java, Spring Boot e React.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --bg-elev: #111111;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --text: #f2f0ec;
+    --text-dim: #a3a09a;
+    --text-faint: #6f6c67;
+    --accent: #e0a865;
+    --accent-soft: rgba(224,168,101,0.12);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  ::selection{ background:var(--accent); color:#111; }
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* NAV */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(10,10,10,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .navlinks{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+    color:var(--text-dim);
+  }
+  .navlinks a{ transition:color .2s ease; }
+  .navlinks a:hover{ color:var(--text); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer; }
+
+  /* HERO */
+  .hero{
+    padding:170px 0 120px;
+    min-height:70vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    color:var(--text-dim);
+    margin-bottom:28px;
+  }
+  .eyebrow .line{
+    width:32px;
+    height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+  h1.name{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(48px, 8vw, 96px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    margin-bottom:26px;
+  }
+  .role{
+    font-size:22px;
+    color:var(--text);
+    font-weight:500;
+    margin-bottom:18px;
+  }
+  .lede{
+    max-width:520px;
+    color:var(--text-dim);
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:40px;
+  }
+  .cta-row{
+    display:flex;
+    gap:14px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    font-size:14.5px;
+    font-weight:500;
+    border-radius:6px;
+    transition:transform .18s ease, opacity .18s ease, background .18s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#171310;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); opacity:.92; }
+  .btn-secondary{
+    border:1px solid var(--border-strong);
+    color:var(--text);
+  }
+  .btn-secondary:hover{ background:rgba(255,255,255,0.04); }
+
+  .social-row{
+    display:flex;
+    gap:20px;
+    font-size:14px;
+    color:var(--text-dim);
+  }
+  .social-row a{ position:relative; transition:color .2s ease; }
+  .social-row a:hover{ color:var(--text); }
+  .social-sep{ color:var(--text-faint); }
+
+  /* SECTION GENERAL */
+  section{ padding:110px 0; border-top:1px solid var(--border); }
+  .section-head{ margin-bottom:56px; max-width:640px; }
+  h2.section-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(34px, 5vw, 46px);
+    margin-bottom:16px;
+    letter-spacing:-0.01em;
+  }
+  .section-sub{
+    color:var(--text-dim);
+    font-size:16px;
+    max-width:520px;
+    line-height:1.7;
+  }
+
+  /* SOBRE */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-text p{
+    color:var(--text-dim);
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:20px;
+    max-width:480px;
+  }
+  .timeline-label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    color:var(--text-faint);
+    margin-bottom:22px;
+  }
+  .timeline-item{
+    padding:18px 0;
+    border-top:1px solid var(--border);
+  }
+  .timeline-item:first-of-type{ border-top:1px solid var(--border); }
+  .timeline-item h4{
+    font-size:15.5px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .timeline-item .meta{
+    font-size:14px;
+    color:var(--text-dim);
+    margin-bottom:6px;
+  }
+  .timeline-status{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    color:var(--accent);
+  }
+
+  /* PROJETOS */
+  .project-featured{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:40px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+    margin-bottom:24px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
+  }
+  .project-title-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .project-title-row h3{
+    font-family:var(--serif);
+    font-size:28px;
+    font-weight:500;
+  }
+  .badge{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    padding:4px 10px;
+    border:1px solid var(--border-strong);
+    border-radius:20px;
+    color:var(--text-dim);
+  }
+  .project-meta{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    color:var(--text-faint);
+    margin-bottom:18px;
+  }
+  .project-desc{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:22px;
+    max-width:440px;
+  }
+  .tag-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:26px;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:12px;
+    padding:5px 11px;
+    border:1px solid var(--border-strong);
+    border-radius:5px;
+    color:var(--text-dim);
+  }
+  .stack-panel{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:24px;
+  }
+  .stack-panel .timeline-label{ margin-bottom:16px; }
+  .stack-list{ list-style:none; }
+  .stack-list li{
+    display:flex;
+    gap:14px;
+    padding:9px 0;
+    font-size:14.5px;
+    border-top:1px solid var(--border);
+  }
+  .stack-list li:first-child{ border-top:none; }
+  .stack-list .idx{
+    font-family:var(--mono);
+    color:var(--accent);
+    font-size:13px;
+    width:20px;
+  }
+
+  .projects-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .project-card{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:30px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .project-card:hover{
+    border-color:var(--border-strong);
+    background:rgba(255,255,255,0.015);
+  }
+  .project-card h3{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:8px;
+    display:inline-block;
+  }
+  .project-card .project-title-row{ margin-bottom:2px; }
+  .project-card .project-meta{ margin-bottom:14px; }
+  .project-card p{
+    color:var(--text-dim);
+    font-size:14.5px;
+    line-height:1.65;
+    margin-bottom:18px;
+  }
+  .project-card .tag-row{ margin-bottom:18px; }
+  .ghlink{
+    font-size:14px;
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:var(--text);
+    transition:gap .2s ease, color .2s ease;
+  }
+  .ghlink:hover{ gap:10px; color:var(--accent); }
+
+  /* TECNOLOGIAS */
+  .tech-row{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:24px;
+    align-items:center;
+    padding:24px 0;
+    border-top:1px solid var(--border);
+  }
+  .tech-row:last-child{ border-bottom:1px solid var(--border); }
+  .tech-label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    color:var(--text-faint);
+  }
+  .tech-tags{ display:flex; gap:10px; flex-wrap:wrap; }
+
+  .practice-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:40px;
+    margin-top:90px;
+  }
+  .practice-item{ padding-top:20px; border-top:1px solid var(--border-strong); }
+  .practice-idx{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--accent);
+    margin-bottom:14px;
+    display:block;
+  }
+  .practice-item h4{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .practice-item p{
+    color:var(--text-dim);
+    font-size:14.5px;
+    line-height:1.7;
+  }
+
+  /* CONTATO */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:24px;
+    padding-top:28px;
+    border-top:1px solid var(--border);
+    margin-bottom:36px;
+  }
+  .contact-item .timeline-label{ margin-bottom:10px; }
+  .contact-item .value{ font-size:15px; word-break:break-word; }
+  .contact-item .value a:hover{ color:var(--accent); }
+
+  footer.sitefooter{
+    border-top:1px solid var(--border);
+    padding:32px 0;
+  }
+  .footer-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:13px;
+    color:var(--text-faint);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px){
+    .navlinks{ display:none; }
+    .about-grid{ grid-template-columns:1fr; gap:44px; }
+    .project-featured{ grid-template-columns:1fr; }
+    .projects-grid{ grid-template-columns:1fr; }
+    .tech-row{ grid-template-columns:1fr; gap:10px; }
+    .practice-grid{ grid-template-columns:1fr; gap:36px; }
+    .contact-grid{ grid-template-columns:1fr; gap:28px; }
+    .hero{ padding:130px 0 80px; }
+    section{ padding:80px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; transition:none !important; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#inicio" class="logo">Marcos Paulo</a>
+      <div class="navlinks">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#tecnologias">Tecnologias</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="inicio" style="border-top:none;">
+    <div class="wrap hero">
+      <div class="eyebrow"><span class="line"></span>PETRÓPOLIS, RIO DE JANEIRO, BRASIL</div>
+      <h1 class="name">Marcos Paulo</h1>
+      <div class="role">Desenvolvedor de Software</div>
+      <p class="lede">Desenvolvo aplicações web e APIs, buscando transformar conhecimento em projetos reais e evoluir constantemente como desenvolvedor.</p>
+      <div class="cta-row">
+        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+        <a href="#contato" class="btn btn-secondary">Entrar em contato</a>
+      </div>
+      <div class="social-row">
+        <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener">GitHub</a>
+        <span class="social-sep">|</span>
+        <a href="https://linkedin.com/in/marcos-paulo-mello-6b87ab375" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Sobre mim</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Sou de Petrópolis, no Rio de Janeiro, e atualmente curso Engenharia de Software. Também concluí uma Residência de Software, onde tive contato com desenvolvimento de aplicações, banco de dados, APIs, frontend e trabalho em equipe.</p>
+          <p>Tenho interesse principalmente em desenvolvimento de software e backend, mas também gosto de entender o projeto como um todo. Busco minha primeira oportunidade profissional na área para continuar aprendendo e contribuir em projetos reais.</p>
+        </div>
+        <div class="about-timeline">
+          <div class="timeline-label">FORMAÇÃO E EXPERIÊNCIA PRÁTICA</div>
+
+          <div class="timeline-item">
+            <h4> Bacharelado em Engenharia de Software</h4>
+            <div class="meta">Estácio</div>
+            <div class="timeline-status">EM ANDAMENTO</div>
+          </div>
+
+          <div class="timeline-item">
+            <h4>Residência de Software</h4>
+            <div class="meta">Serratec · 790 horas</div>
+            <div class="timeline-status">CONCLUÍDA</div>
+          </div>
+
+          <div class="timeline-item">
+            <h4>Técnico em TI</h4>
+            <div class="meta">Liceu São José de Itaipava</div>
+            <div class="timeline-status">CONCLUÍDO EM 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Projetos</h2>
+        <p class="section-sub">Alguns projetos que desenvolvi durante meus estudos e experiências práticas.</p>
+      </div>
+
+      <div class="project-featured">
+        <div>
+          <div class="project-title-row">
+            <h3>LogHub</h3>
+            <span class="badge">PROJETO EM EQUIPE</span>
+          </div>
+          <div class="project-meta">RESIDÊNCIA DE SOFTWARE — SERRATEC</div>
+          <p class="project-desc">Sistema desenvolvido em equipe durante a Residência de Software, com foco no gerenciamento de produtos e operações de estoque.</p>
+          <div class="tag-row">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Kafka</span>
+            <span class="tag">Swagger</span>
+            <span class="tag">n8n</span>
+          </div>
+          <a href="https://github.com/serratec/2026_1_Best2Bee_LogHub_Backend" target="_blank" rel="noopener" class="btn btn-primary">Ver no GitHub</a>
+        </div>
+        <div class="stack-panel">
+          <div class="timeline-label">STACK PRINCIPAL</div>
+          <ul class="stack-list">
+            <li><span class="idx">01</span>Java</li>
+            <li><span class="idx">02</span>Spring Boot</li>
+            <li><span class="idx">03</span>PostgreSQL</li>
+            <li><span class="idx">04</span>Docker</li>
+            <li><span class="idx">05</span>Kafka</li>
+            <li><span class="idx">06</span>Swagger</li>
+            <li><span class="idx">07</span>n8n</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="projects-grid" style="margin-top:20px;">
+
+        <div class="project-card">
+          <div class="project-title-row"><h3>Projeto ONG de Adoção de Animais</h3></div>
+          <div class="project-meta">RESIDÊNCIA DE SOFTWARE — SERRATEC</div>
+          <p>API para uma ONG de adoção de animais, feita como trabalho individual da disciplina de API.</p>
+          <div class="tag-row">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">APIs REST</span>
+          </div>
+          <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener" class="ghlink">Ver no GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title-row"><h3>Trabalho Final de Banco de Dados</h3>
+          <span class="badge">EM EQUIPE</span>
+          </div>
+          <div class="project-meta">RESIDÊNCIA DE SOFTWARE — SERRATEC</div>
+          <p>Sistema de gestão para clínica odontológica em SQL: modelagem, criação de tabelas, inserção de dados e consultas para pacientes, profissionais e agendamentos.</p>
+          <div class="tag-row">
+            <span class="tag">SQL</span><span class="tag">Banco de dados</span>
+          </div>
+          <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener" class="ghlink">Ver no GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title-row">
+            <h3>Trabalho Final de Front-End</h3>
+            <span class="badge">EM EQUIPE</span>
+          </div>
+          <div class="project-meta">RESIDÊNCIA DE SOFTWARE — SERRATEC</div>
+          <p>Trabalho final em grupo da disciplina de Front-End, desenvolvido com HTML, CSS e JavaScript.</p>
+          <div class="tag-row">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener" class="ghlink">Ver no GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title-row"><h3>Trabalho React Native</h3>
+          <span class="badge">EM EQUIPE</span>
+          </div>
+          <div class="project-meta">RESIDÊNCIA DE SOFTWARE — SERRATEC</div>
+          <p>Aplicativo mobile desenvolvido com React Native e TypeScript.</p>
+          <div class="tag-row">
+            <span class="tag">React Native</span><span class="tag">TypeScript</span>
+          </div>
+          <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener" class="ghlink">Ver no GitHub →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIAS -->
+  <section id="tecnologias">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Tecnologias</h2>
+        <p class="section-sub">Ferramentas e linguagens com as quais tenho contato prático em projetos e estudos.</p>
+      </div>
+
+      <div class="tech-list">
+        <div class="tech-row">
+          <div class="tech-label">BACKEND</div>
+          <div class="tech-tags">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">C#</span><span class="tag">APIs REST</span>
+          </div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">FRONTEND</div>
+          <div class="tech-tags">
+            <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">CSS</span>
+          </div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">BANCO DE DADOS</div>
+          <div class="tech-tags">
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">FERRAMENTAS</div>
+          <div class="tech-tags">
+            <span class="tag">Docker</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Postman</span><span class="tag">Swagger</span><span class="tag">n8n</span><span class="tag">Kafka</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="practice-grid">
+        <div class="practice-item">
+          <span class="practice-idx">01</span>
+          <h4>Aprendo fazendo</h4>
+          <p>Gosto de transformar o que estudo em projetos para entender melhor como as tecnologias funcionam na prática.</p>
+        </div>
+        <div class="practice-item">
+          <span class="practice-idx">02</span>
+          <h4>Trabalho em equipe</h4>
+          <p>Tive experiência com desenvolvimento colaborativo durante a Residência de Software, utilizando Git e fluxo de trabalho com equipe.</p>
+        </div>
+        <div class="practice-item">
+          <span class="practice-idx">03</span>
+          <h4>Continuo evoluindo</h4>
+          <p>Estou constantemente estudando e buscando melhorar minha base em desenvolvimento de software.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title">Vamos conversar?</h2>
+        <p class="section-sub">Estou buscando uma oportunidade na área de desenvolvimento de software e estou aberto a conversar sobre vagas, projetos e oportunidades.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="timeline-label">EMAIL</div>
+          <div class="value"><a href="mailto:marcospoliveiramello@gmail.com">marcospoliveiramello@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="timeline-label">GITHUB</div>
+          <div class="value"><a href="https://github.com/marcospmelloo" target="_blank" rel="noopener">github.com/marcospmelloo</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="timeline-label">LINKEDIN</div>
+          <div class="value"><a href="https://linkedin.com/in/marcos-paulo-mello-6b87ab375" target="_blank" rel="noopener">linkedin.com/in/marcos-paulo-mello-6b87ab375</a></div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a href="mailto:marcospoliveiramello@gmail.com" class="btn btn-primary">Enviar email</a>
+        <a href="https://linkedin.com/in/marcos-paulo-mello-6b87ab375" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+        <a href="https://github.com/marcospmelloo" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap footer-row">
+    <span>© 2026 Marcos Paulo. Todos os direitos reservados.</span>
+  </div>
+</footer>
+
+</body>
+</html>
